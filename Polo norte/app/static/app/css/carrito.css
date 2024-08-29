@@ -1,0 +1,124 @@
+/* Estilo general para el contenedor principal del carrito */
+.container {
+    margin-top: 20px;
+}
+
+/* Estilos para la tarjeta de los productos en el carrito */
+.card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+/* Estilo de la imagen del producto */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Estilo de la descripción y precio del producto */
+.card-body p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+/* Estilo del input y botones de cantidad */
+.input-group {
+    max-width: 120px;
+}
+
+.input-group .btn {
+    background-color: #e9ecef;
+    color: #495057;
+    border: 1px solid #ced4da;
+}
+
+.input-group input {
+    width: 40px;
+    text-align: center;
+}
+
+/* Botón de eliminar producto */
+.btn-danger {
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Estilo del resumen del pedido */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body h5 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.card-body p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+hr {
+    margin: 10px 0;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Adaptaciones para dispositivos pequeños */
+@media (max-width: 768px) {
+    .card-body {
+        text-align: center;
+    }
+
+    .img-fluid {
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        margin: 0 auto 15px;
+    }
+
+    .btn-danger {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+}

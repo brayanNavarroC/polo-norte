@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Polo Norte - Librería Online{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>/* base.css */
+
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .navbar {
+            margin-bottom: 20px;
+        }
+        
+        /* Estilos para el menú desplegable */
+        .navbar-nav .dropdown {
+            position: relative;
+        }
+        
+        .navbar-nav .dropdown-menu {
+            background-color: #f8f9fa; /* Fondo claro para el menú desplegable */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+            border: none; /* Elimina el borde por defecto */
+        }
+        
+        /* Efecto de opacidad en el fondo al desplegar el menú */
+        .navbar-nav .dropdown.show .dropdown-menu {
+            background-color: #e9ecef; /* Fondo ligeramente oscuro cuando se despliega */
+        }
+        
+        /* Overlay para oscurecer el fondo */
+        .navbar-nav .dropdown.show::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Color negro con opacidad */
+            z-index: 1000; /* Asegura que esté por encima del contenido */
+            pointer-events: none; /* Permite que los clics pasen a través del overlay */
+        }
+        
+        /* Estilos para el contenedor de la página */
+        .container-fluid {
+            padding: 20px;
+        }
+        /* Estilos para el menú lateral */
+        .sidebar {
+            padding: 15px;
+            background-color: #f8f9fa;
+            height: 200vh; /* Asegura que el menú lateral ocupe toda la altura visible */
+        }
+        
+        /* Estilos para el título del menú lateral */
+        .sidebar h5 {
+            margin-bottom: 15px;
+        }
+        
+        /* Estilos para los elementos de la lista */
+        .sidebar .list-group-item {
+            border: none;
+            background-color: #f8f9fa; /* Color de fondo de los elementos */
+        }
+        
+        /* Estilo de los enlaces dentro de los elementos de lista */
+        .sidebar .list-group-item a {
+            color: #333; /* Color de texto negro */
+            text-decoration: none; /* Elimina el subrayado por defecto */
+            display: block; /* Asegura que el área del enlace sea el bloque completo */
+            padding: 5px; /* Espaciado interno para hacer clic más fácil */
+        }
+        
+        /* Estilo de los enlaces al pasar el ratón por encima */
+        .sidebar .list-group-item a:hover {
+            background-color: #e9ecef; /* Fondo más oscuro al pasar el ratón */
+            color: #000; /* Color de texto negro al pasar el ratón */
+            text-decoration: underline; /* Subrayado al pasar el ratón */
+            transition: background-color 0.3s ease; /* Transición suave para el cambio de fondo */
+        }
+ 
+        /* Estilos para el pie de página */
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+        
+        footer h5 {
+            margin-bottom: 15px;
+        }
+        
+        footer .list-unstyled li a {
+            color: #333;
+        }
+        
+        footer .list-unstyled li a:hover {
+            text-decoration: underline;
+        }
+        
+        footer .text-center {
+            margin-top: 10px;
+        }
+        </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">Polo Norte</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'carrito' %}">Carrito</a>
+                    </li>
+                </ul>
+                <!-- Buscador y Filtros -->
+                <form class="d-flex mx-auto search-form" method="GET" action="#">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Buscar libros..." aria-label="Search" value="{{ request.GET.search }}">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+    
+                <ul class="navbar-nav ms-auto">
+                    <!-- Menú desplegable de Catálogo -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Menú
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'profile' %}">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Intercambio de Libros</a></li>
+                            <li><a class="dropdown-item" href="#">Publicar Libro</a></li>
+                            <li><a class="dropdown-item" href="#">Ayuda</a></li>
+
+                            <!-- Agrega más categorías si es necesario -->
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menú Lateral -->
+<!--             <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar">
+                    <h5>Categorías</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#">No Ficción</a></li>
+                        <li class="list-group-item"><a href="#">Ficción</a></li>
+                        <li class="list-group-item"><a href="#">Fantasía</a></li>
+                        <li class="list-group-item"><a href="#">Intercambio de Libros</a></li>
+                        <li class="list-group-item"><a href="#">Ciencia</a></li>
+                        <li class="list-group-item"><a href="#">Historia</a></li>
+                    </ul>
+                </div>
+            </nav>
+ -->
+
+
+            <!-- Menú Lateral de Perfil -->
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Mis Pedidos
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Seguimiento de Pedidos</a></li>
+                        </ul>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Mi Cuenta
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Datos Personales</a></li>
+                            <li class="list-group-item"><a href="#">Direcciones</a></li>
+                            <li class="list-group-item"><a href="#">Métodos de Pago</a></li>
+                            <li class="list-group-item"><a href="#">Historial de Compras</a></li>
+                            <li class="list-group-item"><a href="#">Notificaciones</a></li>
+                        </ul>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Lista de deseos
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Datos Personales</a></li>
+                            <li class="list-group-item"><a href="#">Direcciones</a></li>
+                            <li class="list-group-item"><a href="#">Métodos de Pago</a></li>
+                            <li class="list-group-item"><a href="#">Historial de Compras</a></li>
+                            <li class="list-group-item"><a href="#">Notificaciones</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            Mis valoraciones
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><a href="#">Datos Personales</a></li>
+                            <li class="list-group-item"><a href="#">Direcciones</a></li>
+                            <li class="list-group-item"><a href="#">Métodos de Pago</a></li>
+                            <li class="list-group-item"><a href="#">Historial de Compras</a></li>
+                            <li class="list-group-item"><a href="#">Notificaciones</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Contenido Principal -->
+            <main role="main" class="col-md-10 ms-sm-auto px-4">
+                {% block contenido %}
+
+
+                
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Enlaces Rápidos</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Sobre Nosotros</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos y Condiciones</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Servicios</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Asistencia al Cliente</a></li>
+                        <li><a href="#">Envíos y Devoluciones</a></li>
+                        <li><a href="#">Métodos de Pago</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Redes Sociales</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2024 Polo Norte. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

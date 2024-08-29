@@ -1,0 +1,59 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Carrito de Compras{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4">Carrito de Compras</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Lista de Productos en el Carrito -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Producto 1</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/150" class="img-fluid" alt="Producto 1">
+                        </div>
+                        <div class="col-md-8">
+                            <h3>Descripcion</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, itaque eveniet. In culpa dolores expedita consequuntur sit! Dolorem, consequuntur! Ullam et eos neque sit, commodi recusandae repellat molestiae ut quaerat?.</p>
+                            <h5>Precio</h5>
+                            <p class="mb-1"> $10.000</p>
+                            <h5>Cantidad</h5>
+
+                            <div class="input-group mb-3" style="max-width: 120px;">
+
+                                <button class="btn btn-outline-secondary" type="button">-</button>
+                                <input type="text" class="form-control text-center" value="1">
+                                <button class="btn btn-outline-secondary" type="button">+</button>
+                            </div>
+                            <button class="btn btn-danger">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Repite esta sección para más productos -->
+        </div>
+
+        <!-- Resumen del Pedido -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Resumen del Pedido</h5>
+                </div>
+                <div class="card-body">
+                    <p>Subtotal: $10.000</p>
+                    <p>Envío: $2.000</p>
+                    <hr>
+                    <h5>Total: $12.000</h5>
+                    <a href="#" class="btn btn-primary btn-block">Proceder al Pago</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

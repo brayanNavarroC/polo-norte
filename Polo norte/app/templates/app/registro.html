@@ -1,0 +1,70 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'app/css/registro.css' %}" rel="stylesheet"> <!-- Enlace a la hoja de estilo register.css -->
+{% endblock %}
+
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4">Registro de Usuario</h2>
+    <form>
+        <!-- Información Personal -->
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre Completo</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="email_confirm" class="form-label">Confirmación Correo Electrónico</label>
+            <input type="email" class="form-control" id="email_confirm" name="email_confirm" required>
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Número de Teléfono</label>
+            <input type="tel" class="form-control" id="telefono" name="telefono">
+        </div>
+
+        <!-- Preferencias de Compra -->
+        <div class="mb-3">
+            <label for="genero" class="form-label">Género</label>
+            <select class="form-select" id="genero" name="genero">
+                <option value="" disabled selected>Seleccionar Género</option>
+                <option value="ficcion">Ficción</option>
+                <option value="no_ficcion">No Ficción</option>
+                <option value="fantasia">Fantasía</option>
+                <!-- Agregar más géneros según sea necesario -->
+            </select>
+        </div>
+
+        <!-- Información de Seguridad -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="password_confirm" class="form-label">Repetir Contraseña</label>
+            <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+        </div>
+
+        <!-- Botones de Registro -->
+        <button type="submit" class="btn btn-primary">Registrar</button>
+
+        <!-- Opciones de Registro con Redes Sociales -->
+        <div class="mt-4">
+            <p>O regístrate con:</p>
+            <a href="#" class="btn btn-outline-primary">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </a>
+            <a href="#" class="btn btn-outline-danger ms-2">
+                <i class="fab fa-google"></i> Google
+            </a>
+        </div>
+    </form>
+</div>
+
+<!-- Añadir Font Awesome para los íconos de redes sociales -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+{% endblock %}
